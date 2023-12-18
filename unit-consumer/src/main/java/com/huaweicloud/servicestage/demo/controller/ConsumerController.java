@@ -25,6 +25,9 @@ public class ConsumerController {
     @Value("${SERVICECOMB_INSTANCE_PROPS:}")
     private String props;
 
+    @Value("${SPRING_CLOUD_SERVICECOMB_DISCOVERY_DATACENTER_AVAILABLEZONE:}")
+    private String availableZone;
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -37,6 +40,7 @@ public class ConsumerController {
     public Map<String, Object> hello() {
         Map<String, String> msg = new HashMap<>();
         msg.put("SERVICECOMB_INSTANCE_PROPS", props);
+        msg.put("AVAILABLE_ZONE", availableZone);
         Map<String, Object> map = new HashMap<>(restTemplate.getForObject(PROVIDER_URL, Map.class));
         map.put(name, msg);
         return map;
