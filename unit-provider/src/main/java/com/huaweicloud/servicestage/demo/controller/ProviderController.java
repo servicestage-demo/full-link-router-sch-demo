@@ -33,7 +33,9 @@ public class ProviderController {
     public Map<String, Object> hello() {
         Map<String, String> msg = new HashMap<>();
         msg.put("SERVICECOMB_INSTANCE_PROPS", props);
-        msg.put("AVAILABLE_ZONE", availableZone);
+        if (StringUtils.hasText(availableZone)) {
+            msg.put("AVAILABLE_ZONE", availableZone);
+        }
         Map<String, Object> map = new HashMap<>();
         map.put(name, msg);
         return map;
