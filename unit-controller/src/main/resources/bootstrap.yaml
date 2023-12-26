@@ -17,6 +17,8 @@ spring:
         # 微服务版本号，本示例使用ServiceStage环境变量。建议保留这种配置方式，部署的时候，不用手工修改版本号，防止契约注册失败。
         version: ${CAS_INSTANCE_VERSION:0.0.1}
         enabledAffinityTag: true
+        # 启用数据中心亲和
+        enabledZoneAware: true
       instance:
         properties:
           affinity-tag: base
