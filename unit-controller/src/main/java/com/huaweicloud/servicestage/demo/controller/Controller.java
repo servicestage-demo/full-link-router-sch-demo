@@ -2,6 +2,7 @@ package com.huaweicloud.servicestage.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.commons.util.InetUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -30,6 +31,9 @@ public class Controller {
     private String availableZone;
 
     @Autowired
+    private InetUtils inetUtils;
+
+    @Autowired
     private RestTemplate restTemplate;
 
     /**
@@ -44,6 +48,7 @@ public class Controller {
         if (StringUtils.hasText(availableZone)) {
             msg.put("AVAILABLE_ZONE", availableZone);
         }
+        msg.put("ip", inetUtils.findFirstNonLoopbackHostInfo().getIpAddress());
         Map<String, Object> map = new HashMap<>(restTemplate.getForObject(CONSUMER_URL, Map.class));
         map.put(name, msg);
         return map;
