@@ -1,6 +1,8 @@
 package com.huaweicloud.servicestage.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.commons.util.InetUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.util.StringUtils;
@@ -25,6 +27,9 @@ public class ProviderController {
     @Value("${SPRING_CLOUD_SERVICECOMB_DISCOVERY_DATACENTER_AVAILABLEZONE:}")
     private String availableZone;
 
+    @Autowired
+    private InetUtils inetUtils;
+
     /**
      * 测试方法
      *
@@ -37,6 +42,7 @@ public class ProviderController {
         if (StringUtils.hasText(availableZone)) {
             msg.put("AVAILABLE_ZONE", availableZone);
         }
+        msg.put("ip", inetUtils.findFirstNonLoopbackHostInfo().getIpAddress());
         Map<String, Object> map = new HashMap<>();
         map.put(name, msg);
         return map;
