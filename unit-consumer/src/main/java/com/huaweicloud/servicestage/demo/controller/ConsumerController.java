@@ -2,6 +2,7 @@ package com.huaweicloud.servicestage.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.commons.util.InetUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -17,8 +18,8 @@ import java.util.Map;
  * @since 2023-07-25
  */
 @RestController
-public class ConsumerController {
-    private static final String PROVIDER_URL = "http://unit-provider/unit-provider/hello";
+public class Controller {
+    private static final String CONSUMER_URL = "http://unit-consumer/unit-consumer/hello";
 
     @Value("${spring.application.name}")
     private String name;
@@ -30,6 +31,9 @@ public class ConsumerController {
     private String availableZone;
 
     @Autowired
+    private InetUtils inetUtils;
+
+    @Autowired
     private RestTemplate restTemplate;
 
     /**
@@ -37,14 +41,15 @@ public class ConsumerController {
      *
      * @return msg
      */
-    @GetMapping("unit-consumer/hello")
+    @GetMapping("unit-controller/hello")
     public Map<String, Object> hello() {
         Map<String, String> msg = new HashMap<>();
         msg.put("SERVICECOMB_INSTANCE_PROPS", props);
         if (StringUtils.hasText(availableZone)) {
             msg.put("AVAILABLE_ZONE", availableZone);
         }
-        Map<String, Object> map = new HashMap<>(restTemplate.getForObject(PROVIDER_URL, Map.class));
+        msg.put("ip", inetUtils.findFirstNonLoopbackHostInfo().getIpAddress());
+        Map<String, Object> map = new HashMap<>(restTemplate.getForObject(CONSUMER_URL, Map.class));
         map.put(name, msg);
         return map;
     }
