@@ -18,8 +18,8 @@ import java.util.Map;
  * @since 2023-07-25
  */
 @RestController
-public class Controller {
-    private static final String CONSUMER_URL = "http://unit-consumer/unit-consumer/hello";
+public class ConsumerController {
+    private static final String PROVIDER_URL = "http://unit-provider/unit-provider/hello";
 
     @Value("${spring.application.name}")
     private String name;
@@ -41,7 +41,7 @@ public class Controller {
      *
      * @return msg
      */
-    @GetMapping("unit-controller/hello")
+    @GetMapping("unit-consumer/hello")
     public Map<String, Object> hello() {
         Map<String, String> msg = new HashMap<>();
         msg.put("SERVICECOMB_INSTANCE_PROPS", props);
@@ -49,7 +49,7 @@ public class Controller {
             msg.put("AVAILABLE_ZONE", availableZone);
         }
         msg.put("ip", inetUtils.findFirstNonLoopbackHostInfo().getIpAddress());
-        Map<String, Object> map = new HashMap<>(restTemplate.getForObject(CONSUMER_URL, Map.class));
+        Map<String, Object> map = new HashMap<>(restTemplate.getForObject(PROVIDER_URL, Map.class));
         map.put(name, msg);
         return map;
     }
