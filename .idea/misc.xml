@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CheckStyle-IDEA" serialisationVersion="2">
+    <checkstyleVersion>8.42</checkstyleVersion>
+    <scanScope>JavaOnly</scanScope>
+    <copyLibs>true</copyLibs>
+    <option name="thirdPartyClasspath">
+      <option value="$APPLICATION_PLUGINS_DIR$/EasyCode/config/checker/checkstyle-third-checks-6.0.1.jar" />
+    </option>
+    <option name="activeLocationIds">
+      <option value="44537b9a-9d48-4a3b-aad4-dda98b3376b1" />
+    </option>
+    <option name="locations">
+      <list>
+        <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
+        <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
+        <ConfigurationLocation id="44537b9a-9d48-4a3b-aad4-dda98b3376b1" type="LOCAL_FILE" scope="All" description="HW EasyCode Checks">$APPLICATION_PLUGINS_DIR$/EasyCode/config/checker/checkstyle_ruleset.xml</ConfigurationLocation>
+      </list>
+    </option>
+    <suppressErrors>true</suppressErrors>
+  </component>
+</project>
