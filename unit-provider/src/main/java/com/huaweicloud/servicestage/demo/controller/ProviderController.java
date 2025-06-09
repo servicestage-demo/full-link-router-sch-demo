@@ -27,6 +27,9 @@ public class ProviderController {
     @Value("${SPRING_CLOUD_SERVICECOMB_DISCOVERY_DATACENTER_AVAILABLEZONE:}")
     private String availableZone;
 
+    @Value("${SHOW_ENVS:}")
+    private String showEnvs;
+
     @Autowired
     private InetUtils inetUtils;
 
@@ -41,6 +44,9 @@ public class ProviderController {
         msg.put("SERVICECOMB_INSTANCE_PROPS", props);
         if (StringUtils.hasText(availableZone)) {
             msg.put("AVAILABLE_ZONE", availableZone);
+        }
+        if (StringUtils.hasText(showEnvs)) {
+            msg.put("SHOW_ENVS", showEnvs);
         }
         msg.put("ip", inetUtils.findFirstNonLoopbackHostInfo().getIpAddress());
         Map<String, Object> map = new HashMap<>();
