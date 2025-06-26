@@ -6,7 +6,7 @@ spring:
     servicecomb:
       context:
         header-context-mapper:
-          x-cse-canary: x-cse-canary
+          x_cse_canary: x_cse_canary
       discovery:
         enabled: true
         # 应用名称，本示例固定值（可替换成自己想要的名字），因为只有应用名称相同的微服务才能够相互发现，不能轻易变化。
